@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'django_bootstrap5',
 
 
+    'datom',
+
     'core',
     'scrap',
     'down',
