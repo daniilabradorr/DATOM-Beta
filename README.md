@@ -1,5 +1,7 @@
 # DATOM - Gestión de Recursos y Datos
 
+(https://datom-beta.onrender.com/)
+
 **DATOM** es una aplicación web desarrollada con Django que permite gestionar el Scrap, Down y Producción de una empresa. Su objetivo es proporcionar una interfaz intuitiva para la administración de recursos, mejorar la eficiencia operativa y optimizar la gestión de tareas de producción.
 
 EL OBJETIVO REAL ES QUE SE VEA LA FUNCIONALIDAD QUE TIENE LA APLICACIÓN Y QUE SE PUEDE GESTIONAR LO QUE QUERAMOS (productos, trabajores, etc.)
