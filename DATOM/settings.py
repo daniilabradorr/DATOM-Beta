@@ -3,7 +3,7 @@ from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATES_DIR = BASE_DIR/ "DATOM" / "templates"
+TEMPLATES_DIR = BASE_DIR/ "datom" / "templates"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -159,7 +159,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/'  # La vista a la que se redirige después de un login exitoso
 LOGOUT_REDIRECT_URL = '/'  # La vista a la que se redirige después de un logout
-
-#Configuración de Celery para la automatización de tareas.
-CELERY_BROKER_URL = 'amqp://localhost'
-CELERY_RESULT_BACKEND = 'rpc://'
