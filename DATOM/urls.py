@@ -12,4 +12,4 @@ urlpatterns = [
     path("down/", include("down.urls", namespace="down")),
     path("produccion/", include("produccion.urls", namespace="produccion")),
     path("admin/", admin.site.urls),
-] + debug_toolbar_urls()
+]
