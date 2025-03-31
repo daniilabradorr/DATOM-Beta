@@ -1,4 +1,5 @@
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -7,11 +8,8 @@ TEMPLATES_DIR = BASE_DIR/ "DATOM" / "templates"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d-(i^l-n6v6kdgce&sj%a!ypi)y78q&n#4!1+%%5)ar@_bz+k8'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+SECRET_KEY = config("SECRET_KEY", default="clave_para_desarrollo")
+DEBUG = config("DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 # .onrender.com
