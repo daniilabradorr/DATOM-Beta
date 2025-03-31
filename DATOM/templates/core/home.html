@@ -1,0 +1,172 @@
+{% extends "layout_core.html" %}
+{% load static %}
+
+{% block description %}Página de inicio de la aplicación DATOM{% endblock %}
+{% block head_title %}Página Home de DATOM{% endblock %}
+
+{% block page_content %}
+
+
+  <!-- Contenedor principal para organizar el contenido con un margen superior -->
+  <div class="container mt-5">
+    <!-- 'container' define un contenedor fluido que centra el contenido con un ancho máximo predeterminado -->
+    <!-- 'mt-5' aplica un margen superior de 3rem (aproximadamente 48px), separando la sección del contenido superior -->
+    <h1 class="text-center">Bienvenido a la Aplicación DATOM</h1>
+    <p class="lead text-center">La herramienta definitiva para gestionar datos de Scrap, Down y Producción en el departamento de Montaje. ¡Optimiza y agiliza tus procesos de manera sencilla!</p>
+    <br>
+    
+    <button id="openDialog" class="btn btn-warning">
+      Cuenta Beta para Acceder
+    </button>
+
+    <dialog id="cuentaBeta">
+      <h2>Cuenta de Lectura de la Beta de DATOM</h2>
+      <p>Usuario: <strong>Lectura</strong></p>
+      <p>Contraseña: <strong>prueba123</strong></p>
+      <p>Solo tiene acceso de lectura por tanto editar, eliminar crear nuevos registros le saldra error</p>
+      <button id="closeDialog" class="btn btn-danger">Cerrar</button>
+    </dialog>
+
+    <p class="lead text-center">(Solo esta en funcionamiento SCRAP ya que es una muestra)</p>
+
+
+    <!-- Sección con tarjetas para las funcionalidades destacadas -->
+    <div class="row mt-5">
+      <!-- 'row' agrupa las columnas en una fila. Es la unidad básica de disposición en Bootstrap -->
+      
+      <!-- Tarjeta 1: Gestión de Scrap -->
+      <div class="col-md-4 mt-2">
+        <!-- 'col-md-4' define una columna que ocupa 4 de las 12 partes posibles de una fila cuando la pantalla es de tamaño mediano o mayor -->
+        <!-- Las columnas se ajustan automáticamente en pantallas pequeñas -->
+        <div class="card shadow-sm">
+          <!-- 'card' crea una tarjeta, un contenedor con un estilo visual elegante usado para contener bloques de contenido -->
+          <!-- 'shadow-sm' aplica una sombra pequeña a la tarjeta, creando un efecto de profundidad -->
+          <img src="{% static 'img/core/home/scrap.svg' %}" class="card-img-top" alt="Scrap Management">
+          <!-- 'card-img-top' coloca una imagen en la parte superior de la tarjeta -->
+          <div class="card-body">
+            <h5 class="card-title">Gestión de Scrap</h5>
+            <p class="card-text">Monitoriza, accede y controla los datos de Scrap, con reportes detallados sobre pérdidas de material y posibles mejoras.Inserta nuevos registros...</p>
+            <a href="{% url 'scrap:scrap_home' %}" class="btn btn-primary">Acceder a Scrap</a>
+            <!-- 'btn' crea un botón estilizado de acuerdo con el tema de Bootstrap -->
+            <!-- 'btn-primary' aplica el estilo del color primario (azul) al botón -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tarjeta 2: Gestión de Down -->
+      <div class="col-md-4 mt-2">
+        <div class="card shadow-sm">
+          <img src="{% static 'img/core/home/down.svg' %}" class="card-img-top" alt="Down Management">
+          <div class="card-body">
+            <h5 class="card-title">Gestión de Down</h5>
+            <p class="card-text">Accede a los registros de tiempos de inactividad, identifica las causas y toma decisiones informadas para mejorar la eficiencia.</p>
+            <a href="#" class="btn btn-primary">Acceder a Down</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta 3: Gestión de Producción -->
+      <div class="col-md-4 mt-2">
+        <div class="card shadow-sm">
+          <img src="{% static 'img/core/home/produccion.svg' %}" class="card-img-top" alt="Producción Management">
+          <div class="card-body">
+            <h5 class="card-title">Gestión de Producción</h5>
+            <p class="card-text">Haz un seguimiento preciso de la producción y asegura que todos los objetivos de producción se cumplan a tiempo y sin contratiempos.</p>
+            <a href="#" class="btn btn-primary">Acceder a Producción</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Sección de vídeo de muestra como sería su uso real de la aplación -->
+     <div class="mt-5">
+      <h3 class="text-center">Muestra de como sería la aplicación con todos los permisos</h3>
+      <p class="text-center">Es muestra de Beta por tanto solo acceso a Scrap</p>
+      <video class="muestra d-block mx-auto" controls width="640">
+        <source src="{% static 'videos/muestra.mp4' %}" type="video/mp4">
+        Tu navegador no soporta la reproducción de video.
+      </video>
+      
+     </div>
+
+
+    <!-- Sección de estadísticas -->
+    <div class="mt-5">
+      <!-- 'mt-5' agrega un margen superior de 3rem (aproximadamente 48px) -->
+      <h3 class="text-center">Estadísticas del Departamento</h3>
+      <p class="text-center">Aquí puedes ver un resumen de las métricas clave para los procesos de Scrap, Down y Producción del departamento de Montaje.</p>
+      <div class="row">
+        <!-- Tarjeta 1: Total Scrap -->
+        <div class="col-md-4">
+          <div class="card text-center">
+            <!-- 'text-center' alinea el contenido al centro -->
+            <div class="card-body">
+              <h5 class="card-title">Total Scrap</h5>
+              <p class="card-text display-4">500</p>
+              <!-- 'display-4' aplica un tamaño de fuente grande, útil para resaltar cifras o valores importantes -->
+              <p class="card-text">Kilogramos perdidos este mes</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2: Down Time -->
+        <div class="col-md-4">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">Down Time</h5>
+              <p class="card-text display-4">35%</p>
+              <p class="card-text">Tiempo de inactividad este mes</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 3: Producción -->
+        <div class="col-md-4">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">Producción</h5>
+              <p class="card-text display-4">1200</p>
+              <p class="card-text">Unidades producidas este mes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensaje de contacto en caso de problemas -->
+    <div class="alert alert-info text-center mt-4">
+      <!-- 'alert' crea un mensaje emergente, 'alert-info' le da un color azul claro -->
+      <p><strong>Si hay algún error o problema</strong> contactar con el equipo de soporte de Montaje o enviar un correo a <a href="mailto:soporte@montaje.com">soporte@montaje.com</a>.</p>
+    </div>
+
+    <!-- Enlaces rápidos a otras secciones -->
+    <div class="mt-5 text-center">
+      <a href="{% url 'scrap:visualizacion' %}" class="btn btn-success">Ir a informes detallados</a>
+      <!-- 'btn btn-success' hace un botón verde -->
+      <a href="{% url 'core:explicacion' %}" class="btn btn-info ml-3">Consultar documentación</a>
+      <!-- 'btn btn-info' hace un botón azul claro, 'ml-3' agrega un margen izquierdo de 1rem (aproximadamente 16px) -->
+    </div>
+  </div>
+
+  <!-- Información adicional -->
+  <div class="container mt-5">
+    <h3 class="text-center">¿Necesitas más información?</h3>
+    <p class="text-center">Accede a las funcionalidades de la aplicación desde el menú de navegación o consulta la documentación disponible para obtener una guía completa sobre cómo utilizar la aplicación.</p>
+  </div>
+
+
+  <script>
+    const openBtn = document.getElementById('openDialog');
+    const dialog = document.getElementById('cuentaBeta');
+    const closeBtn = document.getElementById('closeDialog');
+  
+    openBtn.addEventListener('click', () => {
+      dialog.showModal();
+    });
+  
+    closeBtn.addEventListener('click', () => {
+      dialog.close();
+    });
+  </script>
+{% endblock %}

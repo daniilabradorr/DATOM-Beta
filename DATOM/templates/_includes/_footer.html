@@ -1,0 +1,9 @@
+{% load static %} 
+<hr>
+<footer>
+  <p class="text-center">Copyright © 2025 by "Empresa" | <a href="{% url 'core:aviso' %}">Aviso legal</a></p>
+  <p class="text-center">Proyecto DJANGO realizado por Daniel Labrador Benito | La importancia de este proyecto ES LA FUNCIONALIDAD no los estilos</p>
+  <a href="{% url 'core:home' %}">
+    <img style="width: 150px;" src="{% static 'img/core/logo_DATOM2.png' %}" alt="Logotipo de OPMobility">
+  </a>
+</footer>

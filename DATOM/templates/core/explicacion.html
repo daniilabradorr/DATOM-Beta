@@ -1,0 +1,138 @@
+{% extends "layout_core.html" %}
+{% load static %}
+
+{% block description %}Explicación de la aplicación DATOM{% endblock %}
+{% block head_title %}Acerca de DATOM{% endblock %}
+
+{% block page_content %}
+  <!-- Contenedor principal para organizar el contenido con un margen superior -->
+  <div class="container mt-5">
+    <!-- container: Crea un contenedor con un ancho fijo, y mt-5: margen superior -->
+    <h1 class="text-center display-4 font-weight-bold">¿Qué es DATOM?</h1>
+    <!-- text-center: centra el texto, display-4: aplica un tamaño grande al título, font-weight-bold: pone el texto en negrita -->
+    <p class="lead text-center font">DATOM es una plataforma (AppWeb) versátil y eficiente diseñada para gestionar y optimizar el seguimiento de datos clave en procesos operativos diversos. Aunque su estructura inicial está pensada para el control de Scrap, Down Time y Producción, su arquitectura flexible permite que sea aplicada a una amplia variedad de funcionalidades, como la gestión de inventarios, control de piezas y recursos, mantenimiento preventivo, y más. DATOM ofrece una solución integral para mejorar la eficiencia operativa, independientemente del tipo de datos que necesites gestionar.</p>
+
+    <p class="text-center font-weight-bold">Esta pensada inicialmente para el Scrap, Down, etc para poder dar solo un ejemplo visual. Ademas SE LE PUEDE AÑADIR, QUITAR, EDITAR la funcionalidad que se necesite</p>
+    <!-- text-center: centra el texto, font-weight-bold: pone el texto en negrita -->
+    <!-- Ejemplo de uso en un entorno de gestión de inventarios -->
+    <div class="row mt-5">
+      <!-- row: crea una fila en la cuadrícula -->
+      <div class="col-md-12">
+        <!-- col-md-12: define una columna que ocupa todo el ancho en pantallas medianas y superiores -->
+        <h3 class="text-center font-weight-bold">Ejemplo de uso en un almacén de piezas</h3>
+        <!-- text-center: centra el texto, font-weight-bold: pone el texto en negrita -->
+        <p class="text-center">Imagina necesitamos gestionar un almacén de piezas y 
+          componentes maquinaria. Con DATOM, no solo puedes gestionar el inventario de 
+          piezas, sino también hacer un seguimiento de su disponibilidad,
+           ordenar los registros según las necesidades de producción, 
+           y gestionar alertas cuando los niveles de inventario estén bajos 
+           <strong>YA QUE SE PUEDE CONECTAR A Cualquier MES, 
+            ERP(a través de la API correspondiente) o a lo que queramos</strong>
+            . Además, puedes registrar los movimientos de las piezas, 
+            su uso en distintos procesos de ensamblaje, y generar informes 
+            detallados para mantener siempre un control exhaustivo y tomar
+            decisiones informadas sobre compras y reposición. O simplemente 
+            recoger datos automaticamente de lo que quieras.</p>
+      </div>
+    </div>
+
+    <!-- Sección de descripción general -->
+    <div class="row mt-5">
+      <!-- row: crea una fila con tres columnas (cada una con 4 de las 12 partes de la fila) -->
+      <!-- Descripción 1: Gestión de Scrap -->
+      <div class="col-md-4 mt-2">
+        <!-- col-md-4: cada columna ocupa 4 de las 12 partes en pantallas medianas y superiores, mt-2: margen superior pequeño -->
+        <div class="card shadow-sm">
+          <!-- card: define una tarjeta, shadow-sm: aplica una sombra pequeña -->
+          <img src="{% static 'img/core/home/scrap.svg' %}" class="card-img-top" alt="Scrap Management">
+          <!-- card-img-top: imagen que va en la parte superior de la tarjeta -->
+          <div class="card-body">
+            <!-- card-body: contenido de la tarjeta -->
+            <h5 class="card-title font-weight-bold">Gestión de Scrap</h5>
+            <!-- font-weight-bold: pone el texto en negrita -->
+            <p class="card-text">Con DATOM, puedes realizar un seguimiento detallado de las pérdidas de material (scrap), facilitando la identificación de áreas de mejora y controlando los registros de manera eficiente.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Descripción 2: Gestión de Down -->
+      <div class="col-md-4 mt-2">
+        <!-- col-md-4: columna que ocupa 4 de las 12 partes en pantallas medianas y superiores -->
+        <div class="card shadow-sm">
+          <!-- card: define una tarjeta, shadow-sm: aplica una sombra pequeña -->
+          <img src="{% static 'img/core/home/down.svg' %}" class="card-img-top" alt="Down Management">
+          <!-- card-img-top: imagen que va en la parte superior de la tarjeta -->
+          <div class="card-body">
+            <!-- card-body: contenido de la tarjeta -->
+            <h5 class="card-title font-weight-bold">Gestión de Down</h5>
+            <!-- font-weight-bold: pone el texto en negrita -->
+            <p class="card-text">El seguimiento de los tiempos de inactividad (Down Time) es esencial para detectar problemas operativos. Con DATOM, podrás analizar la eficiencia de los procesos y minimizar tiempos muertos.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Descripción 3: Gestión de Producción -->
+      <div class="col-md-4 mt-2">
+        <!-- col-md-4: columna que ocupa 4 de las 12 partes en pantallas medianas y superiores -->
+        <div class="card shadow-sm">
+          <!-- card: define una tarjeta, shadow-sm: aplica una sombra pequeña -->
+          <img src="{% static 'img/core/home/produccion.svg' %}" class="card-img-top" alt="Producción Management">
+          <!-- card-img-top: imagen que va en la parte superior de la tarjeta -->
+          <div class="card-body">
+            <!-- card-body: contenido de la tarjeta -->
+            <h5 class="card-title font-weight-bold">Gestión de Producción</h5>
+            <!-- font-weight-bold: pone el texto en negrita -->
+            <p class="card-text">DATOM te permite monitorear y controlar el proceso de producción, asegurando que los objetivos se cumplan y optimizando el uso de los recursos en tiempo real.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección de características principales -->
+    <div class="mt-5">
+      <h3 class="text-center font-weight-bold">Características clave de DATOM</h3>
+      <ul class="list-group list-group-flush shadow-sm">
+        <!-- list-group: lista de ítems con un estilo visual de grupo, list-group-flush: elimina los bordes de la lista -->
+        <li class="list-group-item"><strong>Flexibilidad en la gestión de procesos:</strong> Aunque se centra en Scrap, Down Time y Producción, DATOM se adapta fácilmente a la gestión de otros procesos, como inventarios, piezas, recursos, y más.</li>
+        <li class="list-group-item"><strong>Seguimiento de Scrap:</strong> Optimiza la gestión de pérdidas de material, identificando áreas de mejora en los procesos.</li>
+        <li class="list-group-item"><strong>Análisis de Down Time:</strong> Permite identificar y minimizar los tiempos de inactividad, optimizando la eficiencia operativa.</li>
+        <li class="list-group-item"><strong>Control de Producción:</strong> Ayuda a garantizar que los procesos de producción se mantengan dentro de los objetivos de tiempo y recursos.</li>
+        <li class="list-group-item"><strong>Interfaz intuitiva:</strong> DATOM cuenta con una interfaz de usuario fácil de usar, que permite acceder a todas las funcionalidades de manera rápida y sencilla.</li>
+        <li class="list-group-item"><strong>Generación de informes detallados:</strong> Ofrece informes precisos y detallados, desde pérdidas de material hasta niveles de inventario, tiempos de producción, etc.</li>
+      </ul>
+    </div>
+
+    <div class="mt-5">
+      <h3 class="text-center font-weight-bold">Caracterísiticas Que se Podrían Añadir</h3>
+      <ul class="list-group list-group-flush shadow-sm">    
+        <li class="list-group-item"><strong>Gestión de inventarios y recursos:</strong> Puedes usar DATOM para hacer un seguimiento de inventarios de piezas, materiales, y otros recursos esenciales en la producción.</li>
+        <li class="list-group-item"><strong>Alertas y notificaciones:</strong> Recibe notificaciones cuando los niveles de inventario estén bajos, los procesos se retrasen, o los plazos estén por vencer, asegurando que nunca falten recursos cuando más se necesiten.</li>
+        <li class="list-group-item"><strong>Escalabilidad:</strong> A medida que tu empresa crece, DATOM se adapta a la nueva estructura, permitiendo manejar más datos y procesos sin perder eficiencia.</li>
+      </ul>
+    </div>
+
+    <!-- Sección de contacto -->
+    <div class="alert alert-info text-center mt-4">
+      <!-- alert: caja de alerta, alert-info: color azul claro para alerta informativa, text-center: centra el texto -->
+      <p><strong>¿Tienes dudas o necesitas soporte?</strong> Contacta con el equipo de soporte de Montaje a través de <a href="mailto:soporte@montaje.com">soporte@montaje.com</a> para asistencia.</p>
+    </div>
+
+    <!-- Enlaces rápidos a otras secciones -->
+    <div class="mt-5 text-center">
+      <!-- mt-5: margen superior grande, text-center: centra el contenido -->
+      <a href="{% url 'scrap:visualizacion' %}" class="btn btn-success">Ir a informes detallados</a>
+      <!-- btn: crea un botón, btn-success: color verde para indicar éxito -->
+      <a href="{% url 'core:home' %}" class="btn btn-info ml-3">Volver a la página de inicio</a>
+      <!-- btn: crea un botón, btn-info: color azul para información, ml-3: margen a la izquierda para separar los botones -->
+    </div>
+  </div>
+
+  <!-- Información adicional -->
+  <div class="container mt-5">
+    <!-- container: crea un contenedor con un ancho fijo, mt-5: margen superior -->
+    <h3 class="text-center font-weight-bold">¿Necesitas más información?</h3>
+    <!-- text-center: centra el texto, font-weight-bold: pone el texto en negrita -->
+    <p class="text-center">Puedes consultar la documentación completa de la aplicación o acceder a las funcionalidades directamente desde el menú de navegación.</p>
+  </div>
+
+{% endblock %}

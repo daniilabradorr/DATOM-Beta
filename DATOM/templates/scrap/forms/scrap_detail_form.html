@@ -1,0 +1,25 @@
+{% extends "layout_scrap.html" %}
+{% block description %}Formulario de Detalles de un Scrap de la aplicación DATOM de Montaje{% endblock %}
+{% block head_title %}Formulario de Detalles de Scrap{% endblock %}
+
+{% block page_content %}
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Formulario de Detalles de Scrap</h1>
+    
+    <div class="card shadow-lg p-4">
+      <h4 class="card-title text-center mb-4">Introduce el ID del Scrap</h4>
+      
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="id" class="font-weight-bold">ID del Scrap:</label>
+          <input type="text" name="id" id="id" class="form-control" placeholder="Introduce el ID del Scrap" required>
+        </div>
+        
+        <div class="form-group text-center mt-4">
+          <button type="submit" class="btn btn-primary btn-lg">Ver Detalles</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

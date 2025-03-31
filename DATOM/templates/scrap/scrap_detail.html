@@ -1,0 +1,67 @@
+{% extends "layout_scrap.html" %}
+{% block description %}Página de Detalles del Scrap filtrado de la aplicación DATOM de Montaje{% endblock %}
+{% block head_title %}Detalles del Scrap{% endblock %}
+
+{% if perms.puede_ver_scrap %}
+{% if perms.puede_detallar_scrap %}
+{% block page_content %}
+  <div class="container-fluid mt-5">
+
+    <h1 class="mb-4">Detalles del Scrap</h1>
+
+    <!-- Tabla responsive -->
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Proyecto</th>
+            <th>Pieza</th>
+            <th>Tipo de Defecto</th>
+            <th>Cantidad</th>
+            <th>Fecha de Reporte</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ scrap.id }}</td>
+            <td>{{ scrap.nombre_proyecto }}</td>
+            <td>{{ scrap.nombre_pieza }}</td>
+            <td>{{ scrap.tipoDe_defecto }}</td>
+            <td>{{ scrap.cantidad }}</td>
+            <td>{{ scrap.fecha_reporte }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Información adicional -->
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <p><strong>ID del Scrap:</strong> {{ scrap.id }}</p>
+        <p><strong>Nombre del Proyecto:</strong> {{ scrap.nombre_proyecto }}</p>
+        <p><strong>Nombre de la Pieza:</strong> {{ scrap.nombre_pieza }}</p>
+      </div>
+      <div class="col-md-6">
+        <p><strong>Tipo de Defecto:</strong> {{ scrap.tipoDe_defecto }}</p>
+        <p><strong>Cantidad:</strong> {{ scrap.cantidad }}</p>
+        <p><strong>Fecha de Reporte:</strong> {{ scrap.fecha_reporte }}</p>
+      </div>
+    </div>
+
+    <!-- Botones Editar y Eliminar -->
+    <div class="d-flex justify-content-between mb-3">
+      <!-- Botón Editar -->
+      <a href="{% url 'scrap:scrap_edit' scrap.id %}" class="btn btn-warning">
+        <i class="bi bi-pencil-square"></i> Editar
+      </a>
+
+      <!-- Botón Eliminar -->
+      <a href="{% url 'scrap:scrap_delete_form' %}?id={{ scrap.id }}" class="btn btn-danger">
+        <i class="bi bi-trash"></i> Eliminar
+      </a>
+    </div>
+  </div>
+{% endblock %}
+{% endif %}
+{% endif %}

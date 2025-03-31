@@ -1,0 +1,51 @@
+{% extends "layout_scrap.html" %}
+
+{% block description %}Página de Confirmación de Eliminación de un Scrap para Montaje{% endblock %}
+{% block head_title %}Confirmación Eliminación de un Scrap{% endblock %}
+
+{% if perms.puede_eliminar_scrap %}
+{% block page_content %}
+  <div class="container mt-5">
+    <h1 class="mb-4">Confirmación de ELIMINACIÓN de Scrap</h1>
+
+    <!-- Tabla de detalles del Scrap -->
+    <table class="table table-bordered mb-4">
+      <thead class="thead-dark">
+        <tr>
+          <th>id</th>
+          <th>Proyecto</th>
+          <th>Pieza</th>
+          <th>Tipo de Defecto</th>
+          <th>Cantidad</th>
+          <th>Fecha de Reporte</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ scrap.id }}</td>
+          <td>{{ scrap.nombre_proyecto }}</td>
+          <td>{{ scrap.nombre_pieza }}</td>
+          <td>{{ scrap.tipoDe_defecto }}</td>
+          <td>{{ scrap.cantidad }}</td>
+          <td>{{ scrap.fecha_reporte }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Detalles adicionales -->
+    <p><strong>ID del Scrap:</strong> {{ scrap.id }}</p>
+    <p><strong>Nombre del Proyecto:</strong> {{ scrap.nombre_proyecto }}</p>
+    <p><strong>Nombre de la Pieza:</strong> {{ scrap.nombre_pieza }}</p>
+    <p><strong>Tipo de Defecto:</strong> {{ scrap.tipoDe_defecto }}</p>
+    <p><strong>Cantidad:</strong> {{ scrap.cantidad }}</p>
+    <p><strong>Fecha de Reporte:</strong> {{ scrap.fecha_reporte }}</p>
+
+    <!-- Formulario de confirmación -->
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Eliminar</button>
+      <a href="{% url 'scrap:scrap_list' %}" class="btn btn-secondary ml-2">Cancelar</a>
+    </form>
+  </div>
+{% endblock %}
+{% endif %}

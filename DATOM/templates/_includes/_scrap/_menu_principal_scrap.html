@@ -1,0 +1,30 @@
+
+<nav>
+  <ul>
+      <h2>Menú de Navegación</h2>
+      <li><a href="{% url 'core:home' %}">HOME</a></li>
+      <li><a href="{% url 'scrap:scrap_home' %}">Inicio SCRAP</a></li>
+
+      <!-- AUTENTICACION DE LOGEO del usuario -->
+      {% if request.user.is_authenticated %}
+      <h2>Acciones</h2>
+
+        <li><a href="{% url 'scrap:scrap_list' %}">Lista de Scraps</a></li>
+        <li><a href="{% url 'scrap:scrap_detail_form' %}">Ver Detalles de Scrap</a></li>
+        <li><a href="{% url 'scrap:scrap_new' %}">Añadir Nuevo Scrap</a></li>
+        <li><a href="{% url 'scrap:scrap_edit_form' %}">Editar Scrap</a></li>
+        <li><a href="{% url 'scrap:scrap_delete_form' %}">Eliminar Scrap</a></li>
+        <li><a href="{% url 'scrap:visualizacion' %}">Visualizar Dahsboards y Gráficos</a></li>
+      {% else %}
+        <p>No has iniciado sesión O registrado</p>
+        <a href="{% url 'core:login' %}">Iniciar sesión</a>
+        <a href="{% url 'core:register' %}">Registrase</a><br>
+      {% endif %}
+  </ul>
+</nav>
+
+<section class="user">
+  {% if request.user.is_authenticated %}
+    <p>Estás logueado como: {{ request.user }}</p>
+  {% endif %}
+</section>

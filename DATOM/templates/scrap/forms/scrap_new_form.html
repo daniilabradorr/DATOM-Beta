@@ -1,0 +1,39 @@
+{% extends "layout_scrap.html" %}
+
+{% block description %}Formulario para Añadir Nuevo Scrap{% endblock %}
+{% block head_title %}Añadir Nuevo Scrap{% endblock %}
+
+{% if perms.puede_crear_scrap %}
+{% block page_content %}
+  <div class="container mt-5">
+    <h1 class="mb-4">Añadir Nuevo Scrap</h1>
+    <form method="post">
+      {% csrf_token %}
+      
+      <!-- Mostrar los campos del formulario -->
+      <div class="form-group">
+        <label for="id_nombre_proyecto">Proyecto:</label>
+        {{ form.nombre_proyecto }}
+      </div>
+      
+      <div class="form-group">
+        <label for="id_nombre_pieza">Nombre de la Pieza:</label>
+        {{ form.nombre_pieza }}
+      </div>
+
+      <div class="form-group">
+        <label for="id_tipoDe_defecto">Tipo de Defecto:</label>
+        {{ form.tipoDe_defecto }}
+      </div>
+
+      <div class="form-group">
+        <label for="id_cantidad">Cantidad:</label>
+        {{ form.cantidad }}
+      </div>
+      
+      <!-- Botón para enviar el formulario -->
+      <button type="submit" class="btn btn-success mt-3">Guardar</button>
+    </form>
+  </div>
+{% endblock %}
+{% endif %}

@@ -1,0 +1,394 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Visualización de los datos de Scrap del departamento de Montaje de DATOM">
+    <meta name="author" content="Daniel Labrador Benito">
+    <title>Visualización de Defectos</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'favicon/favicon.ico' %}" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+
+    <!-- Highcharts -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+    <!-- Estilos -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9; /* Color de fondo */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 95%;
+            margin: auto; /* Centra el contenido */
+            padding-top: 20px; /* Espacio en la parte superior */
+        }
+
+        header {
+            text-align: center; /* Centra el contenido dentro del header */
+            margin-bottom: 10px; /* Espacio inferior */
+        }
+
+        header img {
+            margin-top: 20px; /* Espacio superior para la imagen */
+            width: 200px; /* Ancho de la imagen */
+            margin-bottom: 0; /* Espacio inferior para la imagen */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); /* Sombra sutil alrededor de la imagen */
+            border-radius: 16px; /* Bordes redondeados */
+        }
+
+        h1 {
+            font-size: 2.5rem; /* Tamaño de fuente para el título */
+            color: #333; /* Color del texto */
+            text-align: center;        
+        }
+
+        .charts-wrapper {
+            display: grid; /* Utiliza un grid para organizar los gráficos */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Múltiples columnas que se ajustan automáticamente */
+            gap: 20px; /* Espacio entre los elementos */
+            padding: 20px 0;
+        }
+
+        .chart-container {
+            background-color: #fff; /* Fondo blanco para el contenedor */
+            padding: 30px; /* Espaciado dentro del contenedor */
+            border-radius: 10px; /* Bordes redondeados */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); /* Sombra sutil */
+        }
+
+        .chart-container h2 {
+            font-size: 1.5rem; /* Tamaño de fuente para los subtítulos */
+            color: #007bff; /* Color azul para el título */
+            text-align: center; /* Centra el subtítulo */
+            margin-bottom: 20px; /* Espacio inferior */
+        }
+ 
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Fondo azul */
+            color: white; /* Color blanco para el texto */
+            text-decoration: none; /* Elimina el subrayado */
+            border-radius: 5px; /* Bordes redondeados para el botón */
+            text-align: center; /* Centra el texto en el botón */
+        }
+
+        .btn-secondary {
+            background-color: #6c757d; /* Fondo gris para el botón secundario */
+        }
+
+        .highcharts-figure {
+            width: 100%;
+            height: 400px; /* Establece una altura para los gráficos */
+        }
+
+        /* Estilo para el gráfico general */
+        .chart-general-container {
+            background-color: #fff; /* Fondo blanco */
+            padding: 30px; /* Espaciado dentro del contenedor */
+            border-radius: 10px; /* Bordes redondeados */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            width: 97%;
+            margin-bottom: 10px; /* Espacio inferior */
+            margin-right: 10px;
+        }
+
+        .highcharts-title {
+            color: #007bff; /* Color azul para el título */
+            font-size: 2rem; /* Tamaño de fuente grande */
+            text-align: center; /* Centra el título */
+        }
+
+        .highcharts-tooltip {
+            background-color: #007bff; /* Fondo azul para el tooltip */
+            color: white; /* Color blanco para el texto */
+            border-radius: 5px; /* Bordes redondeados */
+        }
+
+        /* Responsividad para pantallas pequeñas */
+        @media (max-width: 768px) {
+            .charts-wrapper {
+                grid-template-columns: 1fr; /* Cambia la disposición de las columnas a una sola en pantallas pequeñas */
+            }
+
+            .chart-general-container {
+                padding: 20px; /* Reduce el espaciado dentro del contenedor */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="{% url 'core:home' %}">
+            <img src="{% static 'img/core/logo_DATOM2.png' %}" alt="Logotipo de OPMobility">
+        </a>
+    </header>
+
+    <div class="container">
+        <h1>Visualización de los Datos de Scrap de Mantenimiento</h1>
+
+        <div class="charts-wrapper">
+            <!-- Gráfico 1: Defectos por Proyecto -->
+            <div class="chart-container">
+                <h2>Cantidad de Defectos por Proyecto</h2>
+                <div id="chart-proyecto" class="highcharts-figure"></div>
+            </div>
+
+            <!-- Gráfico 2: Defectos por Tipo -->
+            <div class="chart-container">
+                <h2>Cantidad de Defectos por Tipo de Defecto</h2>
+                <div id="chart-tipo" class="highcharts-figure"></div>
+            </div>
+
+            <!-- Gráfico 3: Datos Introducidos por Técnico -->
+            <div class="chart-container">
+                <h2>Cantidad Datos Introducidos Técnicos</h2>
+                <div id="chart-usuario" class="highcharts-figure"></div>
+            </div>
+
+            <!-- Gráfico 4: Distribución de Defectos por Tipo -->
+            <div class="chart-container">
+                <h2>Distribución de Defectos por Tipo</h2>
+                <div id="chart-pastel" class="highcharts-figure"></div>
+            </div>
+
+        </div>
+
+        <!-- Gráfico General de Todos los Defectos -->
+        <div class="chart-general-container">
+            <h2>Gráfico General de Todos los Defectos (Áreas Apiladas)</h2>
+            <div id="chart-general" class="highcharts-figure"></div>
+        </div>
+
+        <!-- Botón de navegación -->
+        <div class="mt-4">
+            <a href="{% url 'scrap:scrap_home' %}" class="btn btn-secondary">Volver Atrás</a>
+        </div>
+    </div>
+
+    <!-- Scripts para los gráficos -->
+    <script>
+        // Gráfico de Defectos por Proyecto
+        Highcharts.chart('chart-proyecto', {
+            chart: {
+                type: 'column',
+                backgroundColor: '#f4f6f9',
+                borderColor: '#007bff',
+                borderWidth: 2,
+                borderRadius: 10
+            },
+            title: {
+                text: 'Defectos por Proyecto',
+                style: {
+                    color: '#007bff',
+                    fontWeight: 'bold'
+                }
+            },
+            xAxis: {
+                categories: {{ defectos_por_proyecto_keys|safe }},
+                crosshair: true,
+                title: {
+                    text: 'Proyectos'
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Cantidad de Defectos'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' Defectos',
+                backgroundColor: '#007bff',
+                borderRadius: 5,
+                style: {
+                    color: 'white'
+                }
+            },
+            series: [{
+                name: 'Defectos',
+                data: {{ defectos_por_proyecto_values|safe }},
+                color: '#28a745'
+            }]
+        });
+
+        // Gráfico de Defectos por Tipo
+        Highcharts.chart('chart-tipo', {
+            chart: {
+                type: 'column',
+                backgroundColor: '#f4f6f9',
+                borderColor: '#007bff',
+                borderWidth: 2,
+                borderRadius: 10
+            },
+            title: {
+                text: 'Defectos por Tipo de Defecto',
+                style: {
+                    color: '#007bff',
+                    fontWeight: 'bold'
+                }
+            },
+            xAxis: {
+                categories: {{ defectos_por_tipo_keys|safe }},
+                crosshair: true,
+                title: {
+                    text: 'Tipos de Defecto'
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Cantidad de Defectos'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' Defectos',
+                backgroundColor: '#007bff',
+                borderRadius: 5,
+                style: {
+                    color: 'white'
+                }
+            },
+            series: [{
+                name: 'Defectos',
+                data: {{ defectos_por_tipo_values|safe }},
+                color: '#ffc107'
+            }]
+        });
+
+        // Gráfico de Datos Introducidos por Usuario
+        Highcharts.chart('chart-usuario', {
+            chart: {
+                type: 'column',
+                backgroundColor: '#f4f6f9',
+                borderColor: '#007bff',
+                borderWidth: 2,
+                borderRadius: 10
+            },
+            title: {
+                text: 'Datos Introducidos por Técnico/Usuario',
+                style: {
+                    color: '#007bff',
+                    fontWeight: 'bold'
+                }
+            },
+            xAxis: {
+                categories: {{ datos_por_usuario_keys|safe }},
+                crosshair: true,
+                title: {
+                    text: 'Técnicos/Usuarios'
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Cantidad de Datos Introducidos'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' Datos',
+                backgroundColor: '#007bff',
+                style: {
+                    color: 'white'
+                }
+            },
+            series: [{
+                name: 'Datos Introducidos',
+                data: {{ datos_por_usuario_values|safe }},
+                color: '#28a745'
+            }]
+        });
+
+        // Gráfico de Distribución de Defectos por Tipo (Gráfico de Pastel)
+        Highcharts.chart('chart-pastel', {
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: 'Distribución de Defectos por Tipo',
+                style: {
+                    color: '#007bff',
+                    fontWeight: 'bold'
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+                backgroundColor: '#007bff',
+                style: {
+                    color: 'white'
+                }
+            },
+            series: [{
+                name: 'Defectos',
+                colorByPoint: true,
+                data: {{ defectos_por_tipo_percent_keys|safe }}.map((key, i) => {
+                    return {
+                        name: key,
+                        y: {{ defectos_por_tipo_percent_values|safe }}[i],
+                    };
+                })
+            }]
+        });
+
+        // Gráfico General (Áreas Apiladas)
+        Highcharts.chart('chart-general', {
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Gráfico General de Todos los Defectos',
+                style: {
+                    color: '#007bff',
+                    fontWeight: 'bold'
+                }
+            },
+            xAxis: {
+                categories: {{ defectos_por_proyecto_keys|safe }},
+                title: {
+                    text: 'Categorías'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Cantidad de Defectos'
+                }
+            },
+            tooltip: {
+                shared: true,
+                valueSuffix: ' Defectos',
+                backgroundColor: '#007bff',
+                style: {
+                    color: 'white'
+                }
+            },
+            series: [{
+                name: 'Defectos por Proyecto',
+                data: {{ defectos_por_proyecto_values|safe }},
+                color: '#28a745'
+            }, {
+                name: 'Defectos por Tipo',
+                data: {{ defectos_por_tipo_values|safe }},
+                color: '#ffc107'
+            }, {
+                name: 'Datos Introducidos por Usuario',
+                data: {{ datos_por_usuario_values|safe }},
+                color: '#007bff'
+            }]
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<!-- templates/user_activity_log.html -->
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h2>User Activity Log</h2>
+  <ul>
+    {% for log in logs %}
+      <li>{{ log.user.username }} - {{ log.action }} at {{ log.timestamp }} - {{ log.additional_data }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "layout_core.html" %}
+
+{% block head_title %}Registrarse | DATOM{% endblock %}
+{% block description %}Página de registro para la aplicación DATOM{% endblock %}
+
+{% block page_content %}
+<div class="container">
+  <h2 class="text-center mb-4">Registro no disponible</h2>
+
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="alert alert-info text-center p-4 rounded shadow-sm">
+        <h4 class="alert-heading">🚧 Acceso limitado</h4>
+        <p>Actualmente estamos en fase beta y el registro de nuevos usuarios está deshabilitado temporalmente.</p>
+        <hr>
+        <p class="mb-0">Si necesitas acceso, por favor contacta con el equipo de desarrollo o espera al lanzamiento oficial.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enlace a la página de inicio de sesión -->
+  <p class="mt-3 text-center">¿Ya tienes cuenta? <a href="{% url 'core:login' %}">Inicia sesión aquí</a></p>
+
+  
+</div>
+{% endblock %}

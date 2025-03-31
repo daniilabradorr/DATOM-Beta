@@ -1,0 +1,131 @@
+{% extends "layout_scrap.html" %}
+
+{% block description %}Página de SCRAP de Montaje de la aplicación DATOM{% endblock %}
+{% block head_title %}SCRAP Montaje{% endblock %}
+
+{% block page_content %}
+  <!-- Contenedor principal con margen superior -->
+  <div class="container mt-5">
+    <!-- 'container' es el contenedor que centra el contenido y limita su ancho según el tamaño de la pantalla -->
+    <!-- 'mt-5' aplica un margen superior de 3rem (aproximadamente 48px) -->
+    <h1 class="text-center mb-4">Apartado de SCRAP Perteneciente a Montaje</h1>
+    <!-- 'text-center' alinea el texto al centro, 'mb-4' aplica un margen inferior de 1.5rem (aproximadamente 24px) -->
+
+    <!-- Alerta de bienvenida -->
+    <div class="alert alert-info" role="alert">
+      <!-- 'alert' crea un mensaje emergente, 'alert-info' aplica un color de fondo azul claro -->
+      <h4 class="alert-heading">Bienvenido al apartado de Scrap del Departamento de Montaje</h4>
+      <!-- 'alert-heading' estiliza el título de la alerta -->
+      <p>Este apartado es para la introducción de los datos de Scrap en la aplicación DATOM. <strong>Los datos se subirán automáticamente a la base de datos.</strong> Por favor, asegúrese de:</p>
+    </div>
+
+    <!-- Sección de recordatorios -->
+    <section class="mb-4">
+      <!-- 'mb-4' aplica un margen inferior de 1.5rem (aproximadamente 24px) -->
+      <h4><strong>Recuerde:</strong></h4>
+      <ul>
+        <li><strong>Utilizar los nombres estandarizados para los datos.</strong></li>
+        <li><strong>Si tiene algún problema o error:</strong> por favor, contacte con el encargado.</li>
+        <li><strong>Revise bien los datos antes de enviarlos.</strong></li>
+        <li><strong>Evite duplicar registros de scrap.</strong></li>
+      </ul>
+    </section>
+
+    <!-- Sección de instrucciones -->
+    <section>
+      <p>Introduzca todos los datos necesarios en el sistema. Todos los cambios serán registrados, como nuevos datos, eliminaciones, actualizaciones y el inicio de sesión. Si nota que falta algún dato en la aplicación DATOM, comuníquelo a su responsable, quien sabrá cómo proceder.</p>
+    </section>
+
+    <!-- Sección de estadísticas de scrap -->
+    <section class="mt-5">
+      <div class="card">
+        <!-- 'card' crea un contenedor estilizado como tarjeta -->
+        <div class="card-header">
+          <!-- 'card-header' define la cabecera de la tarjeta -->
+          <h5 class="card-title">Estadísticas de Scrap</h5>
+          <!-- 'card-title' estiliza el título dentro de la tarjeta -->
+        </div>
+        <div class="card-body">
+          <!-- 'card-body' contiene el contenido principal de la tarjeta -->
+          <h6 class="card-subtitle mb-2 text-muted">Últimos Datos Registrados</h6>
+          <!-- 'card-subtitle' crea un subtítulo dentro de la tarjeta, 'mb-2' agrega un margen inferior pequeño, 'text-muted' aplica un color gris -->
+          <p><strong>Total de Scraps Registrados:</strong> 1253</p>
+          <p><strong>Scraps por Tipo:</strong> 
+            <ul>
+              <li>Defectos de Montaje: 562</li>
+              <li>Material Dañado: 348</li>
+              <li>Problemas de Calidad: 218</li>
+              <li>Otros: 125</li>
+            </ul>
+          </p>
+          <a href="{% url 'scrap:scrap_list' %}" class="btn btn-info btn-sm">Ver Detalles</a>
+          <!-- 'btn' crea un botón estilizado, 'btn-info' aplica un color de fondo azul claro, 'btn-sm' hace el botón pequeño -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de mejoras del sistema -->
+    <section class="mt-5">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Mejoras en el Sistema</h5>
+        </div>
+        <div class="card-body">
+          <p>El sistema de gestión de Scrap está en constante evolución. Algunas de las mejoras recientes incluyen:</p>
+          <ul>
+            <li>Mayor velocidad de carga de la página.</li>
+            <li>Mejoras en la interfaz de usuario (UI).</li>
+            <li>Implementación de un sistema de validación para evitar registros erróneos.</li>
+            <li>Notificaciones automáticas para los responsables de scrap.</li>
+          </ul>
+          <a href="#" class="btn btn-success">Ver Detalles de las Mejoras</a>
+          <!-- 'btn btn-success' hace el botón verde -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Botón centrado para ir a la lista de scraps -->
+    <div class="text-center mt-4">
+      <!-- 'text-center' alinea el contenido al centro, 'mt-4' aplica un margen superior -->
+      <a href="{% url 'scrap:scrap_list' %}" class="btn btn-primary btn-lg shadow-sm">Ver Lista de Scraps</a>
+      <!-- 'btn-primary' hace el botón azul, 'btn-lg' lo hace grande, 'shadow-sm' agrega una sombra pequeña al botón -->
+    </div>
+
+    <!-- Sección adicional de contacto y ayuda -->
+    <div class="mt-5">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">¿Tienes dudas o necesitas ayuda?</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">Si tienes dudas o necesitas asistencia, no dudes en ponerte en contacto con el encargado del sistema a través de los siguientes medios:</p>
+          <ul>
+            <li><strong>Email:</strong> <a href="mailto:encargado@dominio.com">encargado@dominio.com</a></li>
+            <li><strong>Teléfono:</strong> +123 456 789</li>
+            <li><strong>Horario de atención:</strong> Lunes a Viernes, de 9:00 AM a 6:00 PM</li>
+          </ul>
+          <a href="mailto:encargado@dominio.com" class="btn btn-warning">Contactar al encargado</a>
+          <!-- 'btn btn-warning' hace el botón amarillo -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección de noticias y actualizaciones -->
+    <section class="mt-5">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Últimas Noticias y Actualizaciones</h5>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>Marzo 2025:</strong> Implementación de la nueva funcionalidad de validación de datos de Scrap.</li>
+            <li><strong>Febrero 2025:</strong> Mejoras en la interfaz para facilitar la navegación y uso del sistema.</li>
+            <li><strong>Enero 2025:</strong> Se añadieron nuevos filtros para visualizar los registros de Scrap por tipo y fecha.</li>
+          </ul>
+          <a href="#" class="btn btn-info">Ver todas las noticias</a>
+          <!-- 'btn btn-info' hace el botón azul claro -->
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}

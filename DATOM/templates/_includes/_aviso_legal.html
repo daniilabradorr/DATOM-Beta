@@ -1,0 +1,12 @@
+{% extends "layout_core.html" %}
+
+{% block head_title %}Aviso Legal | DATOM{% endblock %}
+{% block description %}Aviso legal de la aplicación DATOM{% endblock %}
+
+{% block page_content %}
+<div class="container">
+  <h1 class="text-center">Aviso Legal</h1>
+  <p>Aquí va el contenido del aviso legal de la aplicación.</p>
+  <a href="{% url 'core:home' %}" class="btn btn-link">Volver a inicio</a>
+</div>
+{% endblock %}

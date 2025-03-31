@@ -1,0 +1,18 @@
+{% extends "layout_scrap.html" %}
+
+{% block description %}Formulario de Edición de Scrap{% endblock %}
+{% block head_title %}Formulario de Edición de Scrap{% endblock %}
+
+{% block page_content %}
+  <div class="container mt-5">
+    <h1 class="mb-4">Formulario de Edición de Scrap</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id">ID del Scrap:</label>
+        <input type="text" name="id" id="id" class="form-control" placeholder="Ingresa el ID del Scrap" required>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">Editar</button>
+    </form>
+  </div>
+{% endblock %}

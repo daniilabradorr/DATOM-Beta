@@ -1,0 +1,41 @@
+{% extends "layout_scrap.html" %}
+
+{% block description %}Confirmación de Nuevo Scrap{% endblock %}
+{% block head_title %}Confirmación de Nuevo Scrap{% endblock %}
+
+{% if perms.puede_ver_scrap %}
+{% block page_content %}
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <!-- Card for Scrap Confirmation -->
+        <div class="card shadow-lg">
+          <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Confirmación de Nuevo Scrap</h3>
+          </div>
+          <div class="card-body">
+            <p class="lead">¿Estás seguro de que deseas añadir el siguiente Scrap?</p>
+            
+            <div class="mb-3">
+              <p><strong>Nombre del Proyecto:</strong> {{ scrap.nombre_proyecto }}</p>
+              <p><strong>Nombre de la Pieza:</strong> {{ scrap.nombre_pieza }}</p>
+              <p><strong>Tipo de Defecto:</strong> {{ scrap.tipoDe_defecto }}</p>
+              <p><strong>Cantidad:</strong> {{ scrap.cantidad }}</p>
+              <p><strong>Fecha de Reporte:</strong> {{ scrap.fecha_reporte }}</p>
+            </div>
+
+            <!-- Form for confirmation -->
+            <form method="post">
+              {% csrf_token %}
+              <div class="d-flex justify-content-between">
+                <a href="{% url 'scrap:scrap_list' %}" class="btn btn-secondary btn-lg">Cancelar</a>
+                <button type="submit" class="btn btn-success btn-lg">Añadir</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% endif %}
