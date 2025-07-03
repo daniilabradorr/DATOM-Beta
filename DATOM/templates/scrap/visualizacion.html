@@ -181,50 +181,51 @@
     </div>
 
     <!-- Scripts para los gráficos -->
+    <!-- Gráfico 1: Defectos por Proyecto — ahora usa % scrap -->
     <script>
-        // Gráfico de Defectos por Proyecto
         Highcharts.chart('chart-proyecto', {
-            chart: {
-                type: 'column',
-                backgroundColor: '#f4f6f9',
-                borderColor: '#007bff',
-                borderWidth: 2,
-                borderRadius: 10
-            },
-            title: {
-                text: 'Defectos por Proyecto',
-                style: {
-                    color: '#007bff',
-                    fontWeight: 'bold'
-                }
-            },
-            xAxis: {
-                categories: {{ defectos_por_proyecto_keys|safe }},
-                crosshair: true,
-                title: {
-                    text: 'Proyectos'
-                }
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Cantidad de Defectos'
-                }
-            },
-            tooltip: {
-                valueSuffix: ' Defectos',
-                backgroundColor: '#007bff',
-                borderRadius: 5,
-                style: {
-                    color: 'white'
-                }
-            },
-            series: [{
-                name: 'Defectos',
-                data: {{ defectos_por_proyecto_values|safe }},
-                color: '#28a745'
-            }]
+        chart: { type: 'column', backgroundColor: '#f4f6f9' },
+        title: { text: 'Scrap por Proyecto (%)', style:{ color:'#007bff', fontWeight:'bold' } },
+
+        xAxis: { categories: {{ proyectos_keys|safe }}, title:{ text:'Proyecto' } },
+        yAxis: {
+            max: 120,
+            title:{ text:'% Scrap' },
+            plotBands:[
+            { from: 0,   to: 50,  color:'rgba(85,191,59,.07)'  },  // verde
+            { from: 50,  to:100, color:'rgba(255,165,0,.07)'  },  // naranja
+            { from: 100, to:120, color:'rgba(223,83,83,.07)'  }   // rojo
+            ],
+            plotLines:[
+            { value: 50,  color:'#FFA500', width:2, dashStyle:'ShortDash',
+                label:{ text:'Umbral 50 %', style:{ color:'#FFA500', fontWeight:'bold' } } },
+            { value: 100, color:'#DF5353', width:2,
+                label:{ text:'Crítico 100 %', style:{ color:'#DF5353', fontWeight:'bold' } } }
+            ]
+        },
+
+        series:[{
+            name:'% Scrap',
+            data: {{ proyectos_pct_values|safe }},     // <-- lista de porcentajes 0-100
+            zones:[
+            { value: 50,  color:'#55BF3B' },   // verde
+            { value:100,  color:'#FFA500' },   // naranja
+            {              color:'#DF5353' }   // rojo
+            ],
+            zoneAxis:'y'
+        }],
+        tooltip:{ valueSuffix:' %' }
         });
+
+        /* Avisos globales para este dashboard */
+        (function(){
+        const datos = {{ proyectos_pct_values|safe }};
+        if (datos.some(v => v >= 100)) {
+            alert('🟥 ¡Scrap crítico en algún proyecto (≥100 %)! Revisar producción.');
+        } else if (datos.some(v => v >= 50)) {
+            alert('🟧 Aviso: uno o más proyectos superan el 50 % de scrap.');
+        }
+        })();
 
         // Gráfico de Defectos por Tipo
         Highcharts.chart('chart-tipo', {
