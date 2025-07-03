@@ -12,32 +12,31 @@
     <div class="row justify-content-center mb-4">
       <div class="col-md-8">
         <form method="GET" action="{% url 'scrap:scrap_list' %}" class="d-flex justify-content-between">
-          <input id="search_project_piece" type="text" name="q" class="form-control mr-2"
-                 placeholder="Buscar por proyecto o pieza…" aria-label="Buscar por proyecto o pieza">
-          <input id="search_date" type="date" name="date" class="form-control mr-2"
-                 aria-label="Buscar por fecha">
+          <input type="text" name="q"  class="form-control mr-2"
+                 placeholder="Buscar por proyecto o pieza…">
+          <input type="date" name="date" class="form-control mr-2">
           <button type="submit" class="btn btn-primary">Buscar</button>
         </form>
       </div>
     </div>
 
-    <!-- Lista -->
+    <!-- Lista de Scraps -->
     {% if scraps %}
       <div class="list-group">
         {% for scrap in scraps %}
-          {% with scrap.scrap_pct as pct %}  {# 0-100 valor interno #}
+          {% with scrap.cantidad as cant %}
 
           <a href="{% url 'scrap:scrap_detail' scrap.id %}"
              class="list-group-item list-group-item-action d-flex justify-content-between align-items-center
-                    {% if pct >= 100 %}
-                       list-group-item-danger
-                    {% elif pct >= 50 %}
-                       list-group-item-warning
+                    {% if cant >= 100 %}
+                       list-group-item-danger      {# rojo crítico #}
+                    {% elif cant >= 50 %}
+                       list-group-item-warning     {# naranja #}
                     {% else %}
-                       list-group-item-success
+                       list-group-item-success     {# verde #}
                     {% endif %}
                     scrap-cell"
-             data-value="{{ pct }}">
+             data-value="{{ cant }}">
 
             <div>
               <strong>{{ scrap.nombre_proyecto.nombre_proyecto }}</strong><br>
@@ -45,8 +44,8 @@
               <small>{{ scrap.fecha_reporte }}</small>
             </div>
 
-            <!-- Se muestra sólo el ID (o quita esta línea si no lo quieres) -->
-            <span class="badge badge-info">{{ scrap.id }}</span>
+            <!-- Mostramos la cantidad de scrap -->
+            <span class="badge badge-light">{{ cant }}</span>
           </a>
           <hr>
 
@@ -66,9 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
                   .map(td => +td.dataset.value);
 
   if (valores.some(v => v >= 100)) {
-    alert('🟥 ¡Scrap crítico! Al menos un proyecto ha llegado al 100 % o más. Revisa producción.');
+    alert('🟥 ¡Scrap crítico! Al menos un registro supera las 100 unidades.');
   } else if (valores.some(v => v >= 50)) {
-    alert('🟧 Atención: hay proyectos con scrap superior al 50 %.');
+    alert('🟧 Aviso: hay registros con scrap de 50 a 99 unidades.');
   }
 });
 </script>
