@@ -9,7 +9,7 @@
 
     <h1 class="mb-4">Detalles del Scrap</h1>
     {# ── mensaje si supera 100 ── #}
-    {% if cant|int >= 100 %}
+    {% if scrap.cantidad >= 100 %}
       <span class="text-danger font-weight-bold">
         ¡Demasiado scrap! Revisar producción de este proyecto
       </span>
@@ -36,6 +36,12 @@
             <td>{{ scrap.tipoDe_defecto }}</td>
             <td>{{ scrap.cantidad }}</td>
             <td>{{ scrap.fecha_reporte }}</td>
+            {# ── NUEVO: mensaje si supera 1095 ── #}
+    {% if cant|int >= 1095 %}
+      <span class="text-danger font-weight-bold">
+        ¡Demasiado scrap! Revisar producción de este proyecto
+      </span>
+    {% endif %}
           </tr>
         </tbody>
       </table>
