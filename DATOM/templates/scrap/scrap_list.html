@@ -42,6 +42,12 @@
               <strong>{{ scrap.nombre_proyecto.nombre_proyecto }}</strong><br>
               <strong>{{ scrap.nombre_pieza }}</strong><br>
               <small>{{ scrap.fecha_reporte }}</small>
+              {# ── mensaje si supera 100 ── #}
+              {% if cant|int >= 100 %}
+                <span class="text-danger font-weight-bold">
+                  ¡Demasiado scrap! Revisar producción de este proyecto
+                </span>
+              {% endif %}
             </div>
 
             <!-- Mostramos la cantidad de scrap -->
